@@ -1,0 +1,22 @@
+---
+# Ansible tasks to install host-certificates, reposiories, 
+# trust anchors, and packages for a working ARGUS host.
+
+# Installation and configuration is done following the 
+# argus documentation at: 
+# http://argus-documentation.readthedocs.io/en/latest/misc/argus_deployment.html#argus-deployment
+
+# Install host certificates
+- include: install_host_certificate.yml
+
+# Install the EGI IGTF Bundle
+- include: install_EGI_trustanchors.yml
+
+# Install repos (EPEL, CERN WLCG, UMD4)
+- include: install_argus_repo.yml
+
+# Install and Verify fetch-crl
+- include: install_fetch_crl.yml
+
+# Install and configure argus and meta-package.
+- include: install_argus.yml

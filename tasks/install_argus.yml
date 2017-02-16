@@ -1,0 +1,9 @@
+---
+# These tasks install and configure the argus meta-package
+
+# install argus meta package
+- name: install argus meta package
+  yum: name=argus-authz state=present
+
+# http://argus-documentation.readthedocs.io/en/latest/misc/manual_configuration.html#argus-manual-configuration
+

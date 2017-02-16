@@ -1,0 +1,28 @@
+---
+
+# Install the EGI IGTF trust anchors.
+# ref: http://argus-documentation.readthedocs.io/en/latest/misc/argus_deployment.html#argus-deployment
+# ref: https://wiki.egi.eu/wiki/EGI_IGTF_Release
+
+# Always best to install yum-priorities with additional repos.
+- name: Install yum-priorities plugin
+  yum: name=yum-priorities state=present
+
+# Install EGI-trustanchros repo
+- name: Install EGI-trustanchors repo
+  copy: >
+    src=etc/yum.repos.d/EGI-trustanchors.repo
+    dest=/etc/yum.repos.d/EGI-trustanchors.repo
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+
+# Import EGI-trustanchors gpg key
+- name: Import EGI-trustanchors gpg key
+  rpm_key: >
+    state=present
+    key=http://repository.egi.eu/sw/production/cas/1/GPG-KEY-EUGridPMA-RPM-3
+
+# Install trust anchors
+- name: Install EGI-trust anchors
+  yum: name=ca-policy-egi-core state=present

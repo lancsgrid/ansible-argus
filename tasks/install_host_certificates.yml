@@ -1,0 +1,14 @@
+---
+
+# Install host certificate and key on server.
+# uses "host_{cert,key}" variable which expects 
+# a path to a valid host key/cert as the value.
+
+# ref: http://argus-documentation.readthedocs.io/en/latest/misc/argus_deployment.html#argus-deployment
+
+# copy host cert and key to /etc/grid-security/
+- name: copy host cert and key to /etc/grid-security/
+  copy: src={{item.src}} dest={{item.dest}} mode={{item.mode}}
+  with_items:
+    - {src: "{{ host_cert }}", dest: /etc/grid-security/hostcert.pem, mode: "u=rw,g=r,o=r"}
+    - {src: "{{ host_key }}",  dest: /etc/grid-security/hostkey.pem,  mode: "u=r,g=,o="}
