@@ -1,0 +1,24 @@
+# Configured using an ansible template for ansible-argus
+#
+# templates/etc/argus/pdp/pdp.ini.j2
+#
+# Documentation: http://argus-documentation.readthedocs.org/en/latest/pdp/configuration.html#argus-policy-decision-point-pdp-configuration
+
+[SERVICE]
+enitityID = {{ pdp_entityID }}
+hostname = {{ ansible_fqdn }}
+port = {{ pdp_port }}
+adminHost = {{ pdp_admin_host }}
+adminPort = {{ pdp_admin_port }}
+adminPassword = {{ pdp_admin_password }}
+
+[POLICY]
+pap = {{ pdp_paps }}
+retentionInterval = {{ pdp_retentionInterval }}
+
+[SECURITY]
+servicePrivateKey = {{ pdp_servicePrivateKey }}
+serviceCertificate = {{ pdp_serviceCertificate }}
+trustInfoDir = {{ pdp_trustInfoDir }}
+enableSSL = {{ pdp_enableSSL }}
+requireClientCertAuthentication = {{ pdp_requireClientCertAuthentication }}

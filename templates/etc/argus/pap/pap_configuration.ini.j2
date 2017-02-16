@@ -1,0 +1,46 @@
+# Configured using an ansible template for ansible-argus
+#
+# templates/etc/argus/pap/pap_configuration.ini.j2
+#
+# Documentation: http://argus-documentation.readthedocs.org/en/latest/pap/configuration.html#service-configuration-file
+
+[paps]
+{% for pap in paps %}
+{% for pap_alias, pap_alias_parameters in pap.iteritems() %}
+{% for pap_alias_property, pap_alias_value in pap_alias_parameters.iteritems() %}
+{{ pap_alias }}.{{ pap_alias_property|e }} = {{ pap_alias_value|e }}
+{% endfor %}
+
+[paps:properties]
+poll_interval = {{ pap_poll_interval }}
+{#  Loops over list of paps and extracts the alias'  #}
+{% set pap_ordering = 'default' %}
+{% for pap in paps %}
+{% set pap_ordering = (order ~ "," ~ pap.keys()[0]) %}
+{% if loop.last %}
+ordering = {{ pap_ordering }}
+{% endif %}
+{% endfor %}
+
+
+{% if pap_ordering is defined %}
+ordering = {{ pap_ordering }}
+
+[repository]
+location = {{ pap_location }}
+consistency_check = {{ pap_consistency_check }}
+consistency_check.repair = {{ pap_consistency_check_repair }}
+
+[standalone-service]
+hostname = {{ ansible_fqdn }}
+port = {{ pap_port }}
+shutdown_port = {{ pap_shutdown_port }}
+shutdown_command = {{ shutdown_command }}
+entity_id = {{ pap_entity_id }}
+
+[security]
+certificate = {{ pap_certificate }}
+private_key = {{ pap_private_key }}
+trust_store_dir = {{ pap_trust_store_dir }}
+crl_update_interval = {{ pap_crl_update_interval }}
+

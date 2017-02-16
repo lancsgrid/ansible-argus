@@ -1,0 +1,19 @@
+# Configured using an ansible template for ansible-argus
+#
+# templates/etc/argus/pap/pap_authorization.ini.j2
+#
+# Documentation: http://argus-documentation.readthedocs.org/en/latest/pap/configuration.html#service-access-control
+
+{%if pap_dn is defined %}
+[dn]
+{% for dn, permissions in pap_dn.iteritems() %}
+{{ dn }} : {{ permissions }}
+{% endfor %}
+{% endif %}
+
+{%if pap_fqan is defined %}
+[fqan]
+{% for fqan, permissions in pap_fqan.iteritems() %}
+{{ fqan }} : {{ permissions }}
+{% endfor %}
+{% endif %}

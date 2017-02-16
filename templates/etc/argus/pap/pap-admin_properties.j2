@@ -1,0 +1,8 @@
+# Configured using an ansible template for ansible-argus
+#
+# templates/etc/argus/pap/pap-admin_properties.j2
+#
+# Documentation: http://argus-documentation.readthedocs.org/en/latest/pap/cli.html#client-configuration-since-version-1-3-0
+
+hostname = {{ ansible_fqdn }}
+port = {{ pap_port }}
