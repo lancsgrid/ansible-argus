@@ -4,6 +4,8 @@
 #
 # Documentation: http://argus-documentation.readthedocs.org/en/latest/pap/configuration.html#service-configuration-file
 
+
+# perhaps needs to be enforced in a more strict way, alias.type is required.
 [paps]
 {% for pap in paps %}
 {% for pap_alias, pap_alias_parameters in pap.iteritems() %}
@@ -14,17 +16,13 @@
 [paps:properties]
 poll_interval = {{ pap_poll_interval }}
 {#  Loops over list of paps and extracts the alias'  #}
-{% set pap_ordering = 'default' %}
+#{% set pap_ordering = 'default' %}
 {% for pap in paps %}
 {% set pap_ordering = (order ~ "," ~ pap.keys()[0]) %}
 {% if loop.last %}
 ordering = {{ pap_ordering }}
 {% endif %}
 {% endfor %}
-
-
-{% if pap_ordering is defined %}
-ordering = {{ pap_ordering }}
 
 [repository]
 location = {{ pap_location }}

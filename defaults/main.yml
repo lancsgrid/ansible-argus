@@ -1,0 +1,76 @@
+---
+# Default values needed for the various variables in templates and tasks.
+
+
+# templates/etc/argus/pap/pap-admin_properties.j2
+
+pap_port: 8150
+
+
+# templates/etc/argus/pap/pap_configuration.ini.j2
+# defaults taken from: http://argus-documentation.readthedocs.io/en/latest/pap/configuration.html#service-configuration-file
+
+pap_poll_interval: 14400
+
+pap_location: '$PAP_HOME/repository'
+pap_consistency_check: false
+pap_consistency_check_repair: false
+
+# pap_port:  8150
+pap_shutdown_port: 8151
+shutdown_command: shutdown
+pap_entity_id: https://{{ ansible_fqdn }}:{{ pap_port }}/pap/services/ProvisioningService
+
+pap_certificate: /etc/grid-security/hostcert.pem
+pap_private_key: /etc/grid-security/hostkey.pem
+pap_trust_store_dir: /etc/grid-security/certificates
+pap_crl_update_interval: 30m
+
+
+# pdp
+
+#[SERVICE]
+pdp_entityID: {{ pap_entity_id }}
+pdp_port: 8152
+pdp_admin_host: {{ ansible_fqdn }}
+pdp_admin_port: 8153
+#No default: pdp_admin_password: 
+
+#[POLICY]
+pdp_retentionInterval: 240
+
+#[SECURITY]
+pdp_servicePrivateKey: {{ pap_certificate }}
+pdp_serviceCertificate: {{ pap_private_key }}
+pdp_trustInfoDir: {{ pap_trust_store_dir }}
+pdp_enableSSL: false
+pdp_requireClientCertAuthentication: false
+
+
+
+## templates/etc/argus/pepd/pepd.ini.j2
+# [SERVICE]
+pepd_entityID }}: http://{{ ansible_fqdn }}/pepd
+pepd_port: 8154
+pepd_admin_host: 127.0.0.1
+pepd_admin_port: 8155
+#pepd_admin_password:
+#pepd_pip_ordering:
+#pepd_OH_ordering:
+
+#[PDP]
+# pepd_pdps: Required, no defaults
+pepd_maximumCachedResponses: 500
+
+#[SECURITY]
+pepd_servicePrivateKey:   pap_certificate
+pepd_serviceCertificate: pap_private_key
+pepd_trustInfoDir: pap_trust_store_dir
+pepd_enableSSL: false
+pepd_requireClientCertAuthentication: true
+
+
+
+
+
+

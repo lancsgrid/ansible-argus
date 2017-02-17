@@ -7,3 +7,42 @@
 
 # http://argus-documentation.readthedocs.io/en/latest/misc/manual_configuration.html#argus-manual-configuration
 
+# Configure templates/etc/argus/pap/pap-admin_properties
+- name: Configure templates/etc/argus/pap/pap-admin_properties
+  template: >
+    src=etc/argus/pap/pap-admin_properties.j2
+    dest=/etc/argus/pap/pap-admin_properties
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+  notify: restart argus
+
+# Configure /etc/argus/pap/pap_authorization.ini
+- name: Configure /etc/argus/pap/pap_authorization.ini
+  template: >
+    src=etc/argus/pap/pap_authorization.ini.j2
+    dest=/etc/argus/pap/pap_authorization.ini
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+  notify: restart argus
+
+# Configure /etc/argus/pap/pap_configuration.ini
+- name: Configure /etc/argus/pap/pap_configuration.ini
+  template: >
+    src=etc/argus/pap/pap_configuration.ini.j2
+    dest=/etc/argus/pap/pap_configuration.ini
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+  notify: restart argus
+
+# Configure /etc/argus/pepd/pepd.ini
+- name: Configure /etc/argus/pepd/pepd.ini
+  template: >
+    src=etc/argus/pepd/pepd.ini.j2
+    dest=/etc/argus/pepd/pepd.ini
+    owner=root
+    group=root
+    mode="u=rw,g=r,o=r"
+  notify: restart argus
