@@ -8,8 +8,7 @@
 
 - name: run fetch-crl as soon as installed.
   command: /usr/sbin/fetch-crl
-  when fetch-crl.changed
+  when: fetch-crl.changed
 
-- name: enabled ftech-crl cron job
+- name: enable fetch-crl cron job
   service: name=fetch-crl-cron state=running enabled=yes
-       
