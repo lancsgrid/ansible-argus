@@ -18,8 +18,8 @@ pap_consistency_check_repair: false
 
 # pap_port:  8150
 pap_shutdown_port: 8151
-shutdown_command: shutdown
-pap_entity_id: https://{{ ansible_fqdn }}:{{ pap_port }}/pap/services/ProvisioningService
+pap_shutdown_command: shutdown
+pap_entity_id: https://{{ ansible_fqdn }}:{{ pap_port }}/pap
 
 pap_certificate: /etc/grid-security/hostcert.pem
 pap_private_key: /etc/grid-security/hostkey.pem
@@ -30,7 +30,7 @@ pap_crl_update_interval: 30m
 # pdp
 
 #[SERVICE]
-pdp_entityID: {{ pap_entity_id }}
+pdp_entityID: http://{{ ansible_fqdn }}:{{ pdp_port }}/pdp
 pdp_port: 8152
 pdp_admin_host: {{ ansible_fqdn }}
 pdp_admin_port: 8153
