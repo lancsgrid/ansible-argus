@@ -26,13 +26,12 @@ pap_private_key: /etc/grid-security/hostkey.pem
 pap_trust_store_dir: /etc/grid-security/certificates
 pap_crl_update_interval: 30m
 
-
 # pdp
 
 #[SERVICE]
 pdp_entityID: http://{{ ansible_fqdn }}:{{ pdp_port }}/pdp
 pdp_port: 8152
-pdp_admin_host: {{ ansible_fqdn }}
+pdp_admin_host: "{{ ansible_fqdn }}"
 pdp_admin_port: 8153
 #No default: pdp_admin_password: 
 
@@ -40,9 +39,9 @@ pdp_admin_port: 8153
 pdp_retentionInterval: 240
 
 #[SECURITY]
-pdp_servicePrivateKey: {{ pap_certificate }}
-pdp_serviceCertificate: {{ pap_private_key }}
-pdp_trustInfoDir: {{ pap_trust_store_dir }}
+pdp_servicePrivateKey: "{{ pap_certificate }}"
+pdp_serviceCertificate: "{{ pap_private_key }}"
+pdp_trustInfoDir: "{{ pap_trust_store_dir }}"
 pdp_enableSSL: false
 pdp_requireClientCertAuthentication: false
 
