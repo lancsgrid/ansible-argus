@@ -7,13 +7,13 @@
 # http://argus-documentation.readthedocs.io/en/latest/misc/argus_deployment.html#argus-deployment
 
 # Install host certificates
-- include: install_host_certificate.yml
+- include: install_host_certificates.yml
 
 # Install the EGI IGTF Bundle
 - include: install_EGI_trustanchors.yml
 
 # Install repos (EPEL, CERN WLCG, UMD4)
-- include: install_argus_repo.yml
+- include: install_argus_repos.yml
 
 # Install and Verify fetch-crl
 - include: install_fetch_crl.yml

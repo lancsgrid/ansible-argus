@@ -5,6 +5,9 @@
 # a path to a valid host key/cert as the value.
 
 # ref: http://argus-documentation.readthedocs.io/en/latest/misc/argus_deployment.html#argus-deployment
+- name: Creates directory
+  file: path=/etc/grid-security state=directory mode="u=rwx,g=rx,o=rx" owner=root group=root
+
 
 # copy host cert and key to /etc/grid-security/
 - name: copy host cert and key to /etc/grid-security/
