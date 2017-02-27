@@ -4,11 +4,11 @@
 # install fetch-crl #requires epel
 - name: install fetch-crl
   yum: name=fetch-crl state=present
-  register: fetch-crl
+  register: fetchcrl
 
 - name: run fetch-crl as soon as installed.
   command: /usr/sbin/fetch-crl
-  when: fetch-crl.changed
+  when: fetchcrl.changed
 
 - name: enable fetch-crl cron job
   service: name=fetch-crl-cron state=running enabled=yes
