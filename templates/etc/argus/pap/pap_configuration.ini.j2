@@ -12,13 +12,19 @@
 {% for pap_alias_property, pap_alias_value in pap_alias_parameters.iteritems() %}
 {{ pap_alias }}.{{ pap_alias_property|e }} = {{ pap_alias_value|e }}
 {% endfor %}
+{% endfor %}
+{% endfor %}
 
 [paps:properties]
 poll_interval = {{ pap_poll_interval }}
 {#  Loops over list of paps and extracts the alias'  #}
-#{% set pap_ordering = 'default' %}
+{% set pap_ordering = '' %}
 {% for pap in paps %}
-{% set pap_ordering = (order ~ "," ~ pap.keys()[0]) %}
+{% if loop.first %}
+{% set pap_ordering = (pap.keys())[0] %}
+{% else %}
+{% set pap_ordering = pap_ordering ~ "," ~ (pap.keys())[0] %}
+{% endif %}
 {% if loop.last %}
 ordering = {{ pap_ordering }}
 {% endif %}
