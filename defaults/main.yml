@@ -49,7 +49,7 @@ pdp_requireClientCertAuthentication: false
 
 ## templates/etc/argus/pepd/pepd.ini.j2
 # [SERVICE]
-pepd_entityID }}: http://{{ ansible_fqdn }}/pepd
+pepd_entityID: http://{{ ansible_fqdn }}/pepd
 pepd_port: 8154
 pepd_admin_host: 127.0.0.1
 pepd_admin_port: 8155
@@ -67,9 +67,6 @@ pepd_serviceCertificate: pap_private_key
 pepd_trustInfoDir: pap_trust_store_dir
 pepd_enableSSL: false
 pepd_requireClientCertAuthentication: true
-
-
-
 
 
 

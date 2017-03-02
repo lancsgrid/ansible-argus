@@ -14,15 +14,23 @@ adminPassword =	{{ pepd_admin_password }}
 {#  Loops over list of pepd_pips and extracts the alias'  #}
 {% set pepd_pip_ordering = '' %}
 {% for pepd_pip in pepd_pips %}
-{% set pepd_pip_ordering = (order ~ "," ~ pepd_pip.keys()[0]) %}
+{% if loop.first %}
+{% set pepd_pip_ordering = (pepd_pip.keys())[0] %}
+{% else %}
+{% set pepd_pip_ordering = pepd_pip_ordering ~ "," ~ (pepd_pip.keys())[0] %}
+{% endif %}
 {% if loop.last %}
-pips = {{ pepd_pip_ordering }}
+ordering = {{ pepd_pip_ordering }}
 {% endif %}
 {% endfor %}
 {#  Loops over list of pepd_obligationHandlers and extracts the alias'  #}
 {% set pepd_OH_ordering = '' %}
 {% for pepd_OH in pepd_obligationHandlers %}
-{% set pepd_OH_ordering = (order ~ "," ~ pepd_OH.keys()[0]) %}
+{% if loop.first %}
+{% set pepd_OH_ordering = (pepd_OH.keys())[0] %}
+{% else %}
+{% set pepd_OH_ordering = pepd_OH_ordering ~ "," ~ (pepd_OH.keys())[0] %}
+{% endif %}
 {% if loop.last %}
 obligationHandlers = {{ pepd_OH_ordering }}
 {% endif %}
@@ -40,21 +48,7 @@ enableSSL = {{ pepd_enableSSL }}
 requireClientCertAuthentication	= {{ pepd_requireClientCertAuthentication }}
 
 
-
-{% for pedp_pip in pepd_pips %}
-{% if loop.first %}
-#
-# Policy Information Points (PIP) configuration
-#
-{% endif %}
-{% for pepd_pip_name, pepd_pip_parameters in pepd_pip.iteritems() %}
-[{{ pepd_pip_name }}]
-{% for pepd_pip_var, pepd_pip_var_value in pepd_pip_parameters.iteritems() %}
-{{ pepd_pip_var|e }} = {{ pepd_pip_var_value|e }}
-{% endfor %}
-
-
-{% for pedp_OH in pepd_obligationHandlers %}
+{% for pepd_OH in pepd_obligationHandlers %}
 {% if loop.first %}
 #
 # Obligation Handlers (OH) configuration
@@ -65,3 +59,23 @@ requireClientCertAuthentication	= {{ pepd_requireClientCertAuthentication }}
 {% for pepd_OH_var, pepd_OH_var_value in pepd_OH_parameters.iteritems() %}
 {{ pepd_OH_var|e }} = {{ pepd_OH_var_value|e }}
 {% endfor %}
+{% endfor %}
+{% endfor %}
+
+
+
+{% for pepd_pip in pepd_pips %}
+{% if loop.first %}
+#
+# Policy Information Points (PIP) configuration
+#
+{% endif %}
+{% for pepd_pip_name, pepd_pip_parameters in pepd_pip.iteritems() %}
+[{{ pepd_pip_name }}]
+{% for pepd_pip_var, pepd_pip_var_value in pepd_pip_parameters.iteritems() %}
+{{ pepd_pip_var|e }} = {{ pepd_pip_var_value|e }}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+ 
