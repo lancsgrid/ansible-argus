@@ -20,3 +20,6 @@
 
 # Install and configure argus and meta-package.
 - include: install_argus.yml
+
+# Configure IPtables.
+- include: configure_iptables.yml

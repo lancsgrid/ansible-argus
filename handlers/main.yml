@@ -1,0 +1,13 @@
+---
+# Handlers for ansible-bdii-site.
+- name: restart argus-pap
+  listen: restart argus
+  service: name=argus-pap state=restarted
+
+- name: restart argus-pdp
+  listen: restart argus
+  service: name=argus-pdp state=restarted
+
+- name: restart argus-pepd
+  listen: restart argus
+  service: name=argus-pepd state=restarted
