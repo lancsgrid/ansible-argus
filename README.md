@@ -53,6 +53,7 @@ PAPs are optional, and have many additional options. These are done through a `d
 
 
 `[repository]`
+
 |Ansible variable             | variable                 | default |
 |-----------------            | -------------            | --- |
 |pap_location                 | location                 | `$PAP_HOME/repository` |
@@ -61,6 +62,7 @@ PAPs are optional, and have many additional options. These are done through a `d
 
 
 `[standalone-service]`
+
 |Ansible variable      | variable         | default |
 |-----------------     | -------------    | --- |
 |                      | hostname         | non configurable, ansible will set to host fqdn |
@@ -71,6 +73,7 @@ PAPs are optional, and have many additional options. These are done through a `d
 
 
 `[security]`
+
 |Ansible variable        | variable            | default |
 |-----------------       | -------------       | --- |
 |pap_certificate         | certificate         | /etc/grid-security/hostcert.pem |
@@ -94,7 +97,8 @@ Configuration of Argus PDP, `pdp.ini` is done through ansible, the [Argus docume
 
 etc/argus/pdp/pdp.ini
 
-[SERVICE]
+`[SERVICE]`
+
 |Ansible variable                    | variable                        | default |
 |-----------------                   | -------------                   | --- |
 |pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pdp |
@@ -105,12 +109,14 @@ etc/argus/pdp/pdp.ini
 |pdp_admin_password | adminPassword | None |
 
 `[POLICY]`
+
 |Ansible variable      | variable               | default |
 |-----------------     | -------------          | --- |
 |pdp_paps              | paps                   | None |
 |pdp_retentionInterval | pdp_retentionInterval  | 240 (4 hours) |
 
 `[SECURITY]`
+
 |Ansible variable                    | variable                        | default |
 |-----------------                   | -------------                   | --- |
 |pdp_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem |
@@ -129,6 +135,7 @@ Configuring PEP
 Configuration of Argus PEP, `pepd.ini` is done through ansible, the [Argus documentation is here](http://argus-documentation.readthedocs.io/en/latest/pep/pepd_configuration.html#argus-pep-server-con\figuration).
 
 `[SECURITY]`
+
 Ansible variable                    | variable                        | default
 -----------------                   | -------------                   | ---
 pepd_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem 
@@ -146,6 +153,7 @@ pepd_maximumCachedResponses | maximumCachedResponses	      |
 
 
 `[SERVICE]`
+
 pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pepd
                    | hostname 	   | non configurable, ansible will set to host fqdn
 pdp_port           | port	   | 8154
