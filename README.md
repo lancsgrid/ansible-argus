@@ -30,10 +30,10 @@ Configuring pap-admin
 
 This is configured through variables, [Client configuration documentation is available here](http://argus-documentation.readthedocs.io/en/latest/pap/cli.html#client-configuration-since-version-1-3-0). There are only two variables for this:
 
-Ansible variable | variable | default
----------------- | -------- | ---
-                 | host     | non configurable, ansible will set to host fqdn
-pap_port         | port     | 8150
+|Ansible variable | variable | default |
+|---------------- | -------- | -------- |
+|n/a                 | host     | non configurable, ansible will set to host fqdn |
+|pap_port         | port     | 8150 |
 
 
 Configuring the PAP
@@ -45,37 +45,38 @@ PAPs are optional, and have many additional options. These are done through a `d
 
 
 `[paps:properties]`
-Ansible variable  | variable      | default
------------------ | ------------- | ---
-pap_poll_interval | poll_interval | 14400 (4 hours)
-pap_ordering      | ordering      | Obtained from paps dictionary list.
+
+|Ansible variable  | variable      | default |
+|----------------- | ------------- | --- |
+|pap_poll_interval | poll_interval | 14400 (4 hours) |
+|pap_ordering      | ordering      | Obtained from paps dictionary list |
 
 
 `[repository]`
-Ansible variable             | variable                 | default
------------------            | -------------            | ---
-pap_location                 | location                 | `$PAP_HOME/repository`
-pap_consistency_check        | consistency_check        | false
-pap_consistency_check_repair | consistency_check.repair | false
+|Ansible variable             | variable                 | default |
+|-----------------            | -------------            | --- |
+|pap_location                 | location                 | `$PAP_HOME/repository` |
+|pap_consistency_check        | consistency_check        | false |
+|pap_consistency_check_repair | consistency_check.repair | false |
 
 
 `[standalone-service]`
-Ansible variable      | variable         | default
------------------     | -------------    | ---
-                      | hostname         | non configurable, ansible will set to host fqdn
-pap_port              | port             | 8150
-pap_shutdown_port     | shutdown_port    | 8151
-pap_shutdown_command  | shutdown_command | shutdown
-pap_entity_id         | entity_id        | http://<fqdn_hostname>:<port>/pap
+|Ansible variable      | variable         | default |
+|-----------------     | -------------    | --- |
+|                      | hostname         | non configurable, ansible will set to host fqdn |
+|pap_port              | port             | 8150 |
+|pap_shutdown_port     | shutdown_port    | 8151 |
+|pap_shutdown_command  | shutdown_command | shutdown |
+|pap_entity_id         | entity_id        | http://<fqdn_hostname>:<port>/pap |
 
 
 `[security]`
-Ansible variable        | variable            | default
------------------       | -------------       | ---
-pap_certificate         | certificate         | /etc/grid-security/hostcert.pem
-pap_private_key         | private_key         | /etc/grid-security/hostkey.pem
-pap_trust_store_dir     | trsut_store_dir     | /etc/grid-security/certificates
-pap_crl_update_interval | crl_update_interval | 30m
+|Ansible variable        | variable            | default |
+|-----------------       | -------------       | --- |
+|pap_certificate         | certificate         | /etc/grid-security/hostcert.pem |
+|pap_private_key         | private_key         | /etc/grid-security/hostkey.pem |
+|pap_trust_store_dir     | trsut_store_dir     | /etc/grid-security/certificates |
+|pap_crl_update_interval | crl_update_interval | 30m |
 
 Configuration of Argus Policy Administraion Point, `pap_authorization.ini` is done through ansible, the [Argus documentation is here](http://argus-documentation.readthedocs.io/en/latest/pap/configuration.html#service-access-control). This controls the ACEs.  It is done through a `dict` instead of variables.  This is done through two `dict`: `pap_dn` for DNs and `pap_fqan` for VOMS FQAN.  Each takes key:value pairs of the form `principle`:`permission`. An example is:
 
@@ -94,27 +95,29 @@ Configuration of Argus PDP, `pdp.ini` is done through ansible, the [Argus docume
 etc/argus/pdp/pdp.ini
 
 [SERVICE]
-pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pdp
-                   | hostname 	   | non configurable, ansible will set to host fqdn
-pdp_port           | port	   | 8152
-pdp_admin_host     | adminHost	   | fqdn_hostname
-pdp_admin_port     | adminPort	   | 8153
-pdp_admin_password | adminPassword | None
+|Ansible variable                    | variable                        | default |
+|-----------------                   | -------------                   | --- |
+|pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pdp |
+|                   | hostname 	   | non configurable, ansible will set to host fqdn |
+|pdp_port           | port	   | 8152 |
+|pdp_admin_host     | adminHost	   | fqdn_hostname |
+|pdp_admin_port     | adminPort	   | 8153 |
+|pdp_admin_password | adminPassword | None |
 
 `[POLICY]`
-Ansible variable      | variable               | default
------------------     | -------------          | ---
-pdp_paps              | paps                   | None
-pdp_retentionInterval | pdp_retentionInterval  | 240 (4 hours)
+|Ansible variable      | variable               | default |
+|-----------------     | -------------          | --- |
+|pdp_paps              | paps                   | None |
+|pdp_retentionInterval | pdp_retentionInterval  | 240 (4 hours) |
 
 `[SECURITY]`
-Ansible variable                    | variable                        | default
------------------                   | -------------                   | ---
-pdp_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem 
-pdp_serviceCertificate 	    	    | serviceCertificate              | /etc/grid-security/hostkey.pem
-pdp_trustInfoDir		    | trustInfoDir                    | /etc/grid-security/certificates
-pdp_enableSSL                       | enableSSL                       | false
-pdp_requireClientCertAuthentication | requireClientCertAuthentication | false
+|Ansible variable                    | variable                        | default |
+|-----------------                   | -------------                   | --- |
+|pdp_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem |
+|pdp_serviceCertificate 	    	    | serviceCertificate              | /etc/grid-security/hostkey.pem |
+|pdp_trustInfoDir		    | trustInfoDir                    | /etc/grid-security/certificates |
+|pdp_enableSSL                       | enableSSL                       | false |
+|pdp_requireClientCertAuthentication | requireClientCertAuthentication | false |
 
 
 
