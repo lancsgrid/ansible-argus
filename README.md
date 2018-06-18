@@ -136,30 +136,32 @@ Configuration of Argus PEP, `pepd.ini` is done through ansible, the [Argus docum
 
 `[SECURITY]`
 
-Ansible variable                    | variable                        | default
------------------                   | -------------                   | ---
-pepd_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem 
-pepd_serviceCertificate 	    | serviceCertificate              | /etc/grid-security/hostkey.pem
-pepd_trustInfoDir		    | trustInfoDir                    | /etc/grid-security/certificates
-pepd_enableSSL                      | enableSSL                       | false
-pepd_requireClientCertAuthentication | requireClientCertAuthentication | true
+|Ansible variable                    | variable                        | default
+|-----------------                   | -------------                   | ---
+|pepd_servicePrivateKey 	            | servicePrivateKey               | /etc/grid-security/hostcert.pem 
+|pepd_serviceCertificate 	    | serviceCertificate              | /etc/grid-security/hostkey.pem
+|pepd_trustInfoDir		    | trustInfoDir                    | /etc/grid-security/certificates
+|pepd_enableSSL                      | enableSSL                       | false
+|pepd_requireClientCertAuthentication | requireClientCertAuthentication | true
 
 
 `[PDP]`
-Ansible variable            | variable                        | default
-----------------            | -------------                   | ---
-pepd_pdps		    | pdps			      | https://<fqdn_hostname>:<pepd_port>/authz
-pepd_maximumCachedResponses | maximumCachedResponses	      |
+
+|Ansible variable            | variable                        | default
+|----------------            | -------------                   | ---
+|pepd_pdps		    | pdps			      | https://<fqdn_hostname>:<pepd_port>/authz
+|pepd_maximumCachedResponses | maximumCachedResponses	      |
 
 
 `[SERVICE]`
 
-pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pepd
-                   | hostname 	   | non configurable, ansible will set to host fqdn
-pdp_port           | port	   | 8154
-pdp_admin_host     | adminHost	   | fqdn_hostname
-pdp_admin_port     | adminPort	   | 8155
-pdp_admin_password | adminPassword | None
+|pdp_entityID       | entityID      | http://<fqdn_hostname>:<port>/pepd
+|------------       | --------      | --------------------------------------
+|                   | hostname 	    | non configurable, ansible will set to host fqdn
+|pdp_port           | port	    | 8154
+|pdp_admin_host     | adminHost	    | fqdn_hostname
+|pdp_admin_port     | adminPort	    | 8155
+|pdp_admin_password | adminPassword | None
 
 
 The final configuration options are for the pips.  This is done a space separtated list of section names of PIPs and Obligation Handlers. Ansible handles this by have a list of dictionaries.  Each dict is named after a section heading, and contains a series fo key value pairs where each key is a property, and the value is the value.   Ansible will take care of putting the section headings and the full properties into the template file.  The order used will be the order in the list.
